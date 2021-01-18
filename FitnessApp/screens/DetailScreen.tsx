@@ -6,6 +6,7 @@ import {WebView} from 'react-native-webview';
 import { v4 as uuidv4 } from 'uuid';
 import Workout from '../components/Workout';
 import COLORS from '../colors';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
 const DetailScreen = ({ navigation }: DetailsProps) => {
 
@@ -14,7 +15,13 @@ const DetailScreen = ({ navigation }: DetailsProps) => {
             {
                 workoutTitle: 'Plank',
                 duration: '2 min',
-                img_url: './assets/workout.png',
+                img_url: require('../assets/exercise.jpg'),
+                description: 'Tempor adipisicing nisi consectetur consequat ea ad voluptate consequat dolor.'
+            },
+            {
+                workoutTitle: 'Pushup',
+                duration: '2 min',
+                img_url: require('../assets/exercise.jpg'),
                 description: 'Tempor adipisicing nisi consectetur consequat ea ad voluptate consequat dolor.'
             }
         ]},
@@ -22,13 +29,13 @@ const DetailScreen = ({ navigation }: DetailsProps) => {
             {
                 workoutTitle: 'Plank',
                 duration: '2 min',
-                img_url: './assets/workout.png',
+                img_url: require('../assets/exercise.jpg'),
                 description: 'Tempor adipisicing nisi consectetur consequat ea ad voluptate consequat dolor.'
             },
             {
                 workoutTitle: 'Plank',
                 duration: '2 min',
-                img_url: './assets/workout.png',
+                img_url: require('../assets/exercise.jpg'),
                 description: 'Tempor adipisicing nisi consectetur consequat ea ad voluptate consequat dolor.'
             }
         ]},
@@ -36,12 +43,11 @@ const DetailScreen = ({ navigation }: DetailsProps) => {
             {
                 workoutTitle: 'Plank',
                 duration: '2 min',
-                img_url: './assets/workout.png',
+                img_url: require('../assets/exercise.jpg'),
                 description: 'Tempor adipisicing nisi consectetur consequat ea ad voluptate consequat dolor.'
             }
         ]}
     ]);
-
     return (
         <SafeAreaView style={styles.screen}>
             <View style={styles.header} >
@@ -54,7 +60,11 @@ const DetailScreen = ({ navigation }: DetailsProps) => {
                 <Text style={styles.headerFont}>Core Workout</Text>
             </View>
             <View style={styles.workoutContainer}>
-                <Workout data={levels[0]} />
+                <FlatList
+                    data={levels}
+                    renderItem={({item}) => (
+                        <Workout data={item} />
+                    )}/>
             </View>
         </SafeAreaView>
     )
@@ -79,7 +89,8 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     workoutContainer: {
-        marginTop: 30
+        marginTop: 30,
+        flex: 1
     }
 });
 

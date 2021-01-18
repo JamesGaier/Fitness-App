@@ -9,18 +9,19 @@ import COLORS from '../colors';
 
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
     const Card = () => (
-        <TouchableOpacity style={styles.cardView} onPress={() => navigation.navigate('Details')}>
-            <LinearGradient
-                colors={[COLORS.peach, COLORS.lightBrown]}
-                style={styles.card}>
-                <View style={styles.card} >
-                    <View style={styles.cardContainer}>
-                        <Text style={styles.cardFont}>Core{'\n'}Workout</Text>
+        <View style={styles.cardView} >
+            <TouchableOpacity onPress={() => navigation.navigate('Details')}>
+                <LinearGradient
+                    colors={[COLORS.peach, COLORS.lightBrown]}
+                    style={styles.card}>
+                    <View style={styles.card} >
+                        <View style={styles.cardContainer}>
+                            <Text style={styles.cardFont}>Core{'\n'}Workout</Text>
+                        </View>
                     </View>
-                </View>
-
-            </LinearGradient>
-        </TouchableOpacity>
+                </LinearGradient>
+            </TouchableOpacity>
+        </View>
     );
     return (
         <SafeAreaView style={styles.screenStyle}>

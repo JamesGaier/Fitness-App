@@ -27,3 +27,9 @@ interface Exercise {
     img_url: string,
     description: string
 }
+
+interface NativeImageProps {
+    source: string,
+    width?: number,
+    height?: number
+}
