@@ -1,23 +1,26 @@
+import { createStackNavigator } from '@react-navigation/stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { SafeAreaView, TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import COLORS from '../colors';
 
-const HomeScreen = () => {
+
+
+const HomeScreen = ({ navigation }: HomeScreenProps) => {
     const Card = () => (
-        <View style={styles.cardView}>
+        <TouchableOpacity style={styles.cardView} onPress={() => navigation.navigate('Details')}>
             <LinearGradient
                 colors={[COLORS.peach, COLORS.lightBrown]}
                 style={styles.card}>
                 <View style={styles.card} >
-                    <TouchableOpacity style={styles.cardContainer}>
+                    <View style={styles.cardContainer}>
                         <Text style={styles.cardFont}>Core{'\n'}Workout</Text>
-                    </TouchableOpacity>
+                    </View>
                 </View>
 
             </LinearGradient>
-        </View>
+        </TouchableOpacity>
     );
     return (
         <SafeAreaView style={styles.screenStyle}>
