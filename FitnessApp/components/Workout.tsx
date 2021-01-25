@@ -3,13 +3,11 @@ import { View, Text, StyleSheet, Image, FlatList} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 
 import COLORS from '../colors';
-// import '../assets/exercise.jpg';
-import NativeImage from './NativeImage';
 
-const Workout = ({ data, setData }: any) => {
-
+const Workout = ({ data, library, removeItem, addItem }: any) => {
 
     const [liked, setLiked] = useState(data.liked);
     const [toggle, setToggle] = useState(false);
@@ -21,10 +19,10 @@ const Workout = ({ data, setData }: any) => {
             <View style={{marginBottom: 40}}>
                 <View style={styles.subItemContainer}>
                     <View style={styles.workoutSub}>
-                        <Text style={styles.levelTitle}>{exercise.workoutTitle}</Text>
+                        <Text style={styles.title}>{exercise.workoutTitle}</Text>
                     </View>
                     <View style={{flexDirection: 'row'}}>
-                        <Text style={{...styles.levelTitle, marginRight: 15}}>{exercise.duration}</Text>
+                        <Text style={{...styles.title, marginRight: 15}}>{exercise.duration}</Text>
                         <TouchableOpacity style={{marginRight: 35}} onPress={() => setSubToggle(!subToggle)}>
                             {
                                 subToggle ?
@@ -72,21 +70,37 @@ const Workout = ({ data, setData }: any) => {
     return (
         <View>
             <View style={styles.workout}>
-                <Text style={styles.levelTitle}>{data.levelTitle}</Text>
+                {
+                    library ?
+                    <View style={{flexDirection: 'row'}}>
+                        <TouchableOpacity onPress={() => removeItem(data.id)}>
+                            <Feather
+                                name="x"
+                                size={32}
+                                color={COLORS.lightGrey}
+                                style={{paddingTop: 12, marginLeft: 10}}/>
+                        </TouchableOpacity>
+                        <Text style={styles.title}>{data.title}</Text>
+                    </View> :
+                    <Text style={styles.title}>{data.title}</Text>
+                }
                 <View style={styles.iconContainer}>
-                    <TouchableOpacity style={styles.icon} onPress={handlePress}>
-                        {
-                            liked ?
-                            <MaterialCommunityIcons
-                                name="heart"
-                                size={36}
-                                color={COLORS.lightGrey}/> :
-                            <MaterialCommunityIcons
-                                name="heart-outline"
-                                size={36}
-                                color={COLORS.lightGrey}/>
-                        }
-                    </TouchableOpacity>
+                    {
+                        !library &&
+                        <TouchableOpacity style={styles.icon} onPress={handlePress}>
+                            {
+                                liked ?
+                                <MaterialCommunityIcons
+                                    name="heart"
+                                    size={36}
+                                    color={COLORS.lightGrey}/> :
+                                <MaterialCommunityIcons
+                                    name="heart-outline"
+                                    size={36}
+                                    color={COLORS.lightGrey}/>
+                            }
+                        </TouchableOpacity>
+                    }
                     <TouchableOpacity style={styles.icon} onPress={() => setToggle(!toggle)}>
                         {
                             toggle ?
@@ -129,7 +143,7 @@ const styles = StyleSheet.create({
     icon: {
         marginRight: 15
     },
-    levelTitle: {
+    title: {
         fontSize: 24,
         color: COLORS.lightGrey,
         paddingTop: 15,

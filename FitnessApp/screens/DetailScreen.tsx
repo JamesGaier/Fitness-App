@@ -11,7 +11,7 @@ import { FlatList, ScrollView } from 'react-native-gesture-handler';
 const DetailScreen = ({ navigation }: DetailsProps) => {
 
     const [levels, setLevel] = useState([
-        {id: uuidv4(), levelTitle: 'Beginner', liked: false, exercises: [
+        {id: uuidv4(), title: 'Beginner', liked: false, exercises: [
             {
                 workoutTitle: 'Plank',
                 duration: '2 min',
@@ -25,7 +25,7 @@ const DetailScreen = ({ navigation }: DetailsProps) => {
                 description: 'Tempor adipisicing nisi consectetur consequat ea ad voluptate consequat dolor.'
             }
         ]},
-        {id: uuidv4(), levelTitle: 'Intermediate', liked: false, exercises: [
+        {id: uuidv4(), title: 'Intermediate', liked: false, exercises: [
             {
                 workoutTitle: 'Plank',
                 duration: '2 min',
@@ -39,7 +39,7 @@ const DetailScreen = ({ navigation }: DetailsProps) => {
                 description: 'Tempor adipisicing nisi consectetur consequat ea ad voluptate consequat dolor.'
             }
         ]},
-        {id: uuidv4(), levelTitle: 'Advanced', liked: false, exercises: [
+        {id: uuidv4(), title: 'Advanced', liked: false, exercises: [
             {
                 workoutTitle: 'Plank',
                 duration: '2 min',
@@ -63,7 +63,9 @@ const DetailScreen = ({ navigation }: DetailsProps) => {
                 <FlatList
                     data={levels}
                     renderItem={({item}) => (
-                        <Workout data={item} />
+                        <Workout
+                            data={item}
+                            library={false} />
                     )}/>
             </View>
         </SafeAreaView>
@@ -77,7 +79,8 @@ const styles = StyleSheet.create({
     },
     header: {
         height: 60,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingTop: 20
     },
     headerFont: {
         fontSize: 32,
